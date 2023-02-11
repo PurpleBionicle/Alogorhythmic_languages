@@ -9,8 +9,18 @@
 
 Решения сделаны для себя. Никаких гарантий о корректности и оптимальности результатов
 программ речи не идет.
+лень было переносить CMake и *.hpp
 
 <h3>3 Семестр</h3>
+
+* [работа с JSON](3sem/json.cpp) <br>
+* [работа с shared_ptr](3sem/shared_ptr.cpp) <br>
+* [работа с кэш линиями](3sem/cache.cpp) <br>
+* [работа с файловой системой](3sem/filesystem.cpp) <br>
+* [стэк](3sem/stack) <br>
+* [мнопоточность](3sem/multithreads.cpp) <br>
+* [http client](3sem/http_client.cpp) <br>
+* [http server](3sem/http_server.cpp) <br>
 
 <h3>2 Семестр</h3>
 
