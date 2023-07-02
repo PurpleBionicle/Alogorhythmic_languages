@@ -48,13 +48,6 @@ void clock()
 				}
 			}
 			break;
-			/*case i== strelkaY:
-			{
-				switch (j)
-				{
-				case j==strelkaX: cout << "X";
-				}
-			}break;/*///????????
 			case 4:
 			{
 				switch (j)
