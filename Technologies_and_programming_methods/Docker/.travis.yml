@@ -1,0 +1,73 @@
+os:
+- linux
+- osx
+
+# язык
+language: cpp
+
+
+compiler:
+- clang
+- gcc
+
+# глубина клонирования
+git:
+depth: 1
+
+tags: true
+
+# Запускаем на VM
+sudo: true
+
+
+addons:
+apt:
+sources:
+- ubuntu-toolchain-r-test
+- llvm-toolchain-precise-3.7
+packages:
+- cmake
+- cmake-data
+- clang-3.7
+- g++-7
+
+script:
+- cd hello_world_application
+- cmake -H. -B_build
+- cmake --build _build
+- cmake --build _build --target hello_world
+- ./_build/hello_world
+- echo "Hello world application "
+- cd ..
+- cd solver_application
+- cmake -H. -B_build
+- cmake --build _build
+- cmake --build _build --target solver
+- cmake --build _build --target package_source
+- cd _build
+- if [ "$TRAVIS_OS_NAME" = "osx" ]; then cpack -G DragNDrop ;fi
+- if [ "$TRAVIS_OS_NAME" = "linux" ]; then cpack -G DEB ;fi
+
+deploy:
+provider: releases
+
+
+api_key: ${GITHUB_KEY}
+
+file_glob: true
+file:
+- solver_application/_build/solver-source-files.zip
+- solver_application/_build/solver-source-files.tar.gz
+- if [ "$TRAVIS_OS_NAME" = "osx" ]; then 'solver_application/_build/solver.dmg' ;fi
+ - if [ "$TRAVIS_OS_NAME" = "linux" ]; then 'solver_application/_build/solver.rpm' ;fi
+- if [ "$TRAVIS_OS_NAME" = "linux" ]; then 'solver_application/_build/solver.deb' ;fi
+services:
+        - docker>
+
+script:
+        - docker build -t logger .
+
+skip_cleanup: 'true'
+# деплоить только помеченные тэгом коммиты
+on:
+tags: true
